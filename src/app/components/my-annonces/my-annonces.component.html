@@ -1,0 +1,42 @@
+<div class="container">
+  <span class="alert-info" *ngIf="message">{{message}}</span>
+  <div class="container border annonce-style" *ngFor="let annonce of annonces">
+    <div class="row">
+      <div class="col-2-md">
+        <div *ngIf="annonce.images[0]['url']">
+          <a routerLink="annonce/{{annonce.id}}" (click)="selectAnnonce(annonce)">
+            <img class="img-fluid image_thumb" src='{{imageUrl}}/{{annonce.images[0]["url"]}}' alt="c">
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-6" style="margin-left: 15px;">
+        <div class="container">
+          <div class="row">
+            <a routerLink="annonce/{{annonce.id}}" (click)="selectAnnonce(annonce)">
+              <span class="h4">
+                {{annonce.title}}
+              </span>
+            </a>
+          </div>
+          <div class="row simple-text-font">
+            <div class="col-lg-2">
+              <b>km:</b> <span style="margin-left: 10px;">{{annonce.vehicle.km}}</span>
+            </div>
+            <div class="col-lg-2" style="margin-left: 15px;">
+              <b>boite:</b><span style="margin-left: 10px;">{{annonce.vehicle.gearbox.boxName}}</span>
+            </div>
+          </div>
+          <div class="row">
+            <b>prix:</b><span style="margin-left: 10px;">{{annonce.vehicle.price.amount}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-2">
+        <p><button class="btn btn-success mod" (click)="updateAnnonce(annonce.id)">MODIFIER</button></p>
+        <p><button class="btn btn-success sup" *ngIf="!deleteButtonClicked || IDdeleteButtonClicked != annonce.id" (click)="deleteAnnonce(annonce.id)">SUPPRIMER</button></p>
+        <p><button class="btn btn-success sup" *ngIf="deleteButtonClicked && IDdeleteButtonClicked == annonce.id" (click)="confirmDelete(annonce.id)">YES</button></p>
+        <button class="btn btn-success sup" *ngIf="deleteButtonClicked && IDdeleteButtonClicked == annonce.id" (click)="cancelDelete()">NO</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,159 @@
+
+    <form [formGroup]="registerForm" (ngSubmit)="handleSearch()">
+      <div class="container">
+        <div class="row form-group main-filter">
+          <!-- select marque -->
+          <div class="col-lg-2">
+            <label for="marque"><span class="main-text-font">Marque</span></label>
+              <select class="form-control" id="marque" *ngIf="marques; else disabledList" (change)="selectOption($event)">
+                <option class="text-muted" [value]="-1">Choisissez</option>
+                <option *ngFor="let m of marques" [value]="m['id']">{{m['marqueName']}}</option>
+              </select>
+            <ng-template #disabledList>
+              <label>
+                <select class="form-control" disabled>
+                  <option>Choisissez</option>
+                </select>
+              </label>
+            </ng-template>
+          </div>
+          <!-- select model -->
+          <div class="col-lg-2">
+            <label for="model"><span class="main-text-font">Model</span></label>
+            <select class="form-control" id="model" *ngIf="models; else elseBlock2" (change)="selectModel($event)">
+              <option class="text-muted">Choisissez</option>
+              <option *ngFor="let m of models" [value]="m['modelName']">{{m['modelName']}}</option>
+            </select>
+            <ng-template #elseBlock2>
+                <select class="form-control" disabled>
+                  <option >{{modelListHeadMessage}}</option>
+                </select>
+            </ng-template>
+          </div>
+          <!-- select Year -->
+          <div class="col-lg-2">
+            <label for="yearS"><span class="main-text-font">Annee min</span></label>
+            <select class="form-control" id="yearS"  (change)="selectStartYear($event)">
+              <option class="text-muted" [value]="1920">De</option>
+              <option *ngFor="let m of startYearsForDisplay" [value]="m">{{m}}</option>
+            </select>
+          </div>
+
+          <div class="col-lg-2">
+            <label for="yearE"><span class="main-text-font">Annee max</span></label>
+            <select class="form-control" id="yearE" (change)="selectEndYear($event)">
+              <option class="text-muted" [value]="2020">À</option>
+              <option *ngFor="let m of endYearsForDisplay" [value]="m">{{m}}</option>
+            </select>
+          </div>
+
+          <!-- select Kilometres -->
+          <div class="col-lg-2">
+            <label for="prS"><span class="main-text-font">Prix min</span></label>
+            <select class="form-control" id="prS"  (change)="selectStartPrice($event)">
+              <option class="text-muted" [value]="0">Min</option>
+              <option *ngFor="let m of startPrice" [value]="m">{{m}}</option>
+            </select>
+          </div>
+
+          <div class="col-lg-2">
+            <label for="prE"><span class="main-text-font">Prix max</span></label>
+            <select class="form-control" id="prE" (change)="selectEndPrice($event)">
+              <option class="text-muted" [value]="30000000">Max</option>
+              <option *ngFor="let m of endPrice" [value]="m">{{m}}</option>
+              <option [value]="30000000">50000 et +</option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="row form-group" [ngClass]="{invisible: visibility}">
+          <!-- select kilometres -->
+          <div class="col-lg-2">
+            <label for="kmS"></label>
+            <select class="form-control" id="kmS" (change)="selectKmS($event)">
+              <option class="text-muted" [value]="0">Kilometres min</option>
+              <option *ngFor="let m of startKm" [value]="m">{{m}}</option>
+            </select>
+          </div>
+          <div class="col-lg-2">
+            <label for="kmE"></label>
+            <select class="form-control" id="kmE" (change)="selectKmE($event)">
+              <option class="text-muted" [value]="10000000">Kilometres max
+              <option *ngFor="let m of endKm" [value]="m">{{m}}</option>
+              <option>1000000 et +</option>
+            </select>
+          </div>
+
+          <!-- select gearBox -->
+          <div class="col-lg-2">
+            <label for="gearbox"></label>
+            <select class="form-control" id="gearbox" *ngIf="gearboxes; else elseBlock2" (change)="selectGearBox($event)">
+              <option class="text-muted">Boite de Vitesse</option>
+              <option *ngFor="let m of gearboxes" [value]="m['boxName']">{{m['boxName']}}</option>
+            </select>
+            <ng-template #elseBlock2>
+              <label>
+                <select class="form-control inputstl" disabled>
+                  <option class="text-muted">Boîte de vitesse</option>
+                </select>
+              </label>
+            </ng-template>
+          </div>
+
+          <!-- select engine -->
+          <div class="col-lg-2">
+            <label for="motor"></label>
+            <select class="form-control" id="motor">
+              <option class="text-muted">Moteur</option>
+            </select>
+          </div>
+          <!-- select power -->
+          <div class="col-lg-2">
+            <label for="cv"></label>
+            <select class="form-control" id="cv">
+              <option class="text-muted">Puissance</option>
+            </select>
+          </div>
+          <!-- select etat -->
+          <div class="col-lg-2">
+            <label for="etat"></label>
+            <select class="form-control" id="etat">
+              <option class="text-muted">Etat</option>
+            </select>
+          </div>
+
+          <!-- select carburant -->
+          <div class="col-lg-2">
+            <label for="carb"></label>
+            <select class="form-control" id="carb">
+              <option class="text-muted">Carburant</option>
+            </select>
+          </div>
+
+          <!-- select color -->
+          <div class="col-lg-2">
+            <label for="color"></label>
+            <select class="form-control" id="color">
+              <option class="text-muted">Couleur</option>
+            </select>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-lg-8 col-md-6 col-sm-2 col-12">
+
+          </div>
+          <div class="col-lg-2 col-md-2 col-sm-2 col-12">
+            <button type="reset" (click)="toggle()" class="btn btn-info btn-sm advancedSearch link" role="button">{{advanceSearchLink}}</button>
+          </div>
+
+          <div class="col-lg-1 col-md-2 col-sm-2 col-6">
+            <button type="submit" class="btn btn-success">Chercher</button>
+          </div>
+
+          <div class="col-lg-1 col-md-2 col-sm-2 col-6">
+            <button type="reset" (click)="onReset()" class="btn btn-secondary" style="margin-left: 10px">Effacer</button>
+          </div>
+        </div>
+      </div>
+    </form>

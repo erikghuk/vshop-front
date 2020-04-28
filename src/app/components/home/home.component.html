@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="card m-1">
+    <div class="card-body">
+      <app-reception-image></app-reception-image>
+      <app-filter></app-filter>
+    </div>
+  </div>
+</div>
+
+<div class="container slider-container">
+  <div class="row slider-header">
+    <div class="col-lg-5">
+      <p class="white-text-font font-25">Nouvelles annonces</p>
+    </div>
+    <div class="col-lg-1">
+      <button class="move button button4" (click)="right()">&#11164;</button>
+    </div>
+    <div class="col-lg-1">
+      <button class="move button button4" (click)="left()">&#11166;</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="slider-new-10">
+      <div *ngIf="first10Annonces.length > 0" class="thumbs">
+        <ul>
+          <li class="border" *ngFor="let annonce of first10Annonces">
+            <div class="annonce-block" (click)="selectAnnonce(annonce)">
+              <img class="image-thumbs" src="http://localhost:8080/img/{{annonce.images[0]['url']}}" alt="">
+              <span class="descr">{{annonce.vehicle.model.marque.marqueName}} {{annonce.vehicle.model.modelName}}</span>
+              <span>{{annonce.vehicle.price.amount}}&euro;</span> <span class="float-right text-muted">{{annonce.vehicle.year.productionDate}}</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+  <div style="height: 400px">
+
+  </div>
+

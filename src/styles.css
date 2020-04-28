@@ -1,0 +1,193 @@
+/* You can add global styles to this file, and also import other style files */
+@import url(https://unpkg.com/bootstrap@4.3.1/dist/css/bootstrap.min.css);
+html {
+  font-family: Arial,Helvetica Neue,Helvetica,yandex-sans-rub-sign,sans-serif;
+}
+body {
+  background-color: #e2e2e2;
+}
+
+.link {
+  cursor: pointer;
+  color: blue;
+}
+
+.ng-valid[required] {
+  border-left: 3px solid #42A948;
+}
+
+.ng-invalid:not(form) {
+  border-left: 3px solid #A94442;
+}
+
+.form-control {
+  background-color: white;
+}
+
+.spacing {
+  margin-top: 40px;
+  padding: 10px;
+}
+
+.white-text-font  {
+  color: white;
+}
+
+.font-30 {
+  font-size: 30px;
+}
+
+.font-25 {
+  font-size: 25px;
+}
+
+.font-20 {
+  font-size: 20px;
+}
+
+.font-15 {
+  font-size: 15px;
+}
+
+.info-font {
+  background-color: #273952;
+  font-size: 25px;
+  color: white;
+}
+
+.simple-text-font {
+  font-size: 18px;
+}
+
+.small-text-font {
+  font-size: 14px;
+}
+
+.margin-left-2 {
+  margin-left: 2px;
+}
+
+.margin-left-5 {
+  margin-left: 5px;
+}
+
+.margin-left-10 {
+  margin-left: 10px;
+}
+
+.margin-left-20 {
+  margin-left: 20px;
+}
+
+.margin-left-40 {
+  margin-left: 40px;
+}
+
+.arrow-back {
+  padding: 5px;
+  border-radius: 10px;
+  font-size: 27px;
+  cursor: pointer;
+}
+
+.arrow-back:hover {
+  background-color: #dfe6eb;
+}
+
+.head-text {
+  font-size: 30px;
+  font-weight: bold;
+  color: #211f26;
+}
+
+.search-result {
+  background-color: rgba(35, 46, 86, 0.96);
+}
+
+.annonce-style {
+  margin: 15px;
+  padding: 20px;
+  background-color: #ffffff;
+  transition-duration: 300ms;
+  box-shadow: -1px 6px 11px -7px rgba(0,0,0,0.78);
+}
+
+.annonce-style:hover {
+  background-color: #f2f2f2;
+}
+
+.image_thumb {
+  border: 1px solid #0b0b3b; /* Gray border */
+  border-radius: 4px;  /* Rounded border */
+  padding: 5px; /* Some padding */
+  width: 250px!important; /* Set a small width */
+}
+
+
+.btn {
+  background-color: #273952;
+}
+.btn:hover {
+  background-color: #354d6f;
+}
+
+.btn:disabled {
+  background-color: #a4a4a4;
+  cursor: not-allowed;
+}
+
+.sup {
+  background-color: #94391f;
+}
+.sup:hover {
+  background-color: #a83e22;
+}
+
+select:hover {
+  background-color: #cff7ff;
+}
+
+.card-footer {
+  margin-top: 10px;
+  background-color: white;
+  font-size: 14px;
+}
+
+.help-block {
+  font-size: 14px;
+}
+
+
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.annonce-title {
+  font-weight: bold;
+  font-size: 25px;
+}
+
+.annonce-descr {
+  font-size: 16px;
+  text-align: justify;
+}
+
+.annonce-border {
+  border: 1px solid #d5d5d5;
+}
+
+.list-group{
+  line-height: 2em;
+  width: 500px;
+}
+
+table {
+  font-size: 18px;
+  padding-top: 6px !important;
+  border-collapse: inherit;
+  line-height: 2em;
+  width: 100%;
+  display: table;
+}

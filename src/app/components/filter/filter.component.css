@@ -1,0 +1,23 @@
+.invisible {
+  display: none;
+}
+
+
+.advancedSearch {
+  padding: 7px;
+  margin-right: 10px;
+  background-color: #ffffff;
+  border-style: none;
+}
+
+.advancedSearch:hover {
+  background-color: #dbdbdb;
+  color: black;
+}
+
+.bg-image {
+  position: relative;
+  background: url("../../../assets/pic/cmaibc2.jpg") no-repeat center center /cover ;
+  height: 280px;
+  width: 100%;
+}

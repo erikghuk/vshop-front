@@ -1,0 +1,68 @@
+<div class="card m-3">
+  <h3 class="card-header">Modifier votre annonce</h3>
+  <div class="card-body">
+    <form [formGroup]="annonceForm" (ngSubmit)="annonceUpdate()" enctype="multipart/form-data">
+      <div class="container">
+        <div class="form-row top-space">
+          <div class="col-lg-8 s">
+            <label for="title"><span class="main-text-font">Title</span></label>
+            <input formControlName="title" class="form-control form-control-sm" type="text" id="title" name="title"  [ngClass]="{ 'is-invalid': submitted && f.title.errors }" (change)="setTitle()">
+            <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+              <div *ngIf="f.title.errors.required">Titre obligatoire</div>
+              <div *ngIf="f.title.errors.pattern">Des characteres speciales ne sont pas authorisées.</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-row top-space">
+          <div class="col-lg-8">
+            <label for="descr"><span class="main-text-font">Description</span></label>
+            <textarea formControlName="descr" rows="10" class="form-control form-control-sm" id="descr" name="descr" [ngClass]="{ 'is-invalid': submitted && f.descr.errors }" (change)="setDescription()"></textarea>
+            <div *ngIf="submitted && f.descr.errors" class="invalid-feedback">
+              <div *ngIf="f.descr.errors.required">Description obligatoire</div>
+              <div *ngIf="f.descr.errors.pattern">Des characteres speciales ne sont pas authorisées</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row top-space">
+          <div class="form-group col-lg-2">
+            <!-- Price -->
+            <label for="price"><span class="main-text-font">Prix</span></label>
+            <input formControlName="price" type="number" id="price" step="100" min="0" max="2000000" name="price" (change)="selectPrice()" [ngClass]="{ 'is-invalid': submitted && f.price.errors }">
+
+            <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+              <div *ngIf="f.price.errors.required">Le prix de vehicule est obligatoire</div>
+              <div *ngIf="f.price.errors.pattern">Que des chifres sont authorisées</div>
+            </div>
+          </div>
+
+          <div class="form-group col-lg-2">
+            <!-- Year -->
+            <label for="year"><span class="main-text-font">Année</span></label>
+            <input formControlName="year" type="number" id="year" step="1" min="1920" max="2020" name="year" (change)="selectYear()" [ngClass]="{ 'is-invalid': submitted && f.year.errors }">
+            <div *ngIf="submitted && f.year.errors" class="invalid-feedback">
+              <div *ngIf="f.year.errors.required">L'année d'immatriculation de vehicule est obligatoire</div>
+              <div *ngIf="f.year.errors.pattern">Que des chifres sont authorisées</div>
+            </div>
+          </div>
+
+          <div class="form-group col-lg-4">
+            <!-- Km -->
+            <label for="km"><span class="main-text-font">Kilométrage</span></label>
+            <input formControlName="km" type="number" id="km" step="10" min="0" max="2000000" name="km" [ngClass]="{ 'is-invalid': submitted && f.km.errors }" (change)="setKm()">
+            <div *ngIf="submitted && f.km.errors" class="invalid-feedback">
+              <div *ngIf="f.km.errors.required">Le kilométrage de vehicule est obligatoire</div>
+              <div *ngIf="f.km.errors.pattern">Que des chifres sont authorisées</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class=" col-md-6">
+            <button type="submit" class="btn btn-success annonce-add" (click)="updateAnnonce()">Enrégistrer</button>
+            <button type="submit" class="btn btn-success annonce-add" (click)="cancel()">Annuler</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,99 @@
+<div class="container spacing">
+  <div class="row">
+    <div class="col-lg-6">
+      <a (click)="backToSearchResult()" class="arrow-back">{{arrowLeft}}</a>
+      <span class="text-capitalize head-text margin-left-10">{{annonce.vehicle.model.marque.marqueName}} {{annonce.vehicle.model.modelName}} ({{annonce.vehicle.year.productionDate}})</span>
+    </div>
+    <div class="col-lg-2">
+      <span class="head-text">&euro;{{annonce.vehicle.price.amount}}</span>
+    </div>
+    <div class="col-lg-4 text-right">
+      <button class="btn btn-success" (click)="contactMessage(annonce)">Contacter avec vendeur</button>
+    </div>
+  </div>
+  <div class="row margin-left-40">
+    <div class="col-lg-6">
+      <span class="small-text-font text-muted">Date d'annonce: </span><span class="text-muted">{{annonce.creationDate}}</span>
+    </div>
+  </div>
+  <div class="row margin-left-40">
+    <div class="col-lg-6">
+      <span class="small-text-font text-muted">La derniere modification: </span><span class="text-muted">{{annonce.modifDate}}</span>
+    </div>
+  </div>
+  <div class="row spacing">
+    <div class="col-lg-6">
+    <figure>
+      <div class="main-image-div">
+        <img class="main-image" src="http://localhost:8080/img/{{selectedImage}}" alt="">
+      </div>
+      <div class="thumbs">
+        <ul>
+          <li *ngFor="let image of annonce.images">
+            <img class="image-thumbs" src="http://localhost:8080/img/{{image['url']}}" alt="" (click)="showImage(image)">
+          </li>
+        </ul>
+      </div>
+    </figure>
+    </div>
+    <div class="col-lg-6">
+      <div class="row">
+        <div class="col-lg-12">
+          <table class="table">
+            <tr>
+              <td>Carroserie</td>
+              <td class="text-muted">Coupé</td>
+            </tr>
+            <tr>
+              <td>Kilométrage</td>
+              <td class="text-muted">{{annonce.vehicle.km}} km</td>
+            </tr>
+            <tr>
+              <td>Année</td>
+              <td class="text-muted">{{annonce.vehicle.year.productionDate}}</td>
+            </tr>
+            <tr>
+              <td>Boite de vitesse</td>
+              <td class="text-muted">{{annonce.vehicle.gearbox.boxName}}</td>
+            </tr>
+            <tr>
+              <td>Couleur</td>
+              <td class="text-muted">rouge</td>
+            </tr>
+            <tr>
+              <td>Portes</td>
+              <td class="text-muted">2</td>
+            </tr>
+            <tr>
+              <td>Puissanse</td>
+              <td class="text-muted">180cv</td>
+            </tr>
+            <tr>
+              <td>Carburant</td>
+              <td class="text-muted">essence</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <button class="btn btn-success">Chercher une autre</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container border">
+  <div class="row">
+    <div class="col-lg-12 text-capitalize annonce-title ">{{annonce.title}}</div>
+  </div>
+
+  <div class="row spacing">
+    <div class="col-lg-12 text-wrap annonce-text annonce-descr">{{annonce.description}}</div>
+  </div>
+  <div class="row spacing">
+    <div class="col-lg-6">
+      <button class="btn btn-success" (click)="backToSearchResult()">Résultat de recherche</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="container">
+  <span class="display-4">{{message}}</span>
+  <div class="container border spacing">
+    <div class="row">
+      <div class="col-md-6">
+        <a class="btn btn-primary btn-block spacing profile-button"><span class="white-text-font">Favorites</span></a>
+      </div>
+      <div class="col-md-6">
+        <a routerLink="u-annonces" class="btn btn-primary btn-block spacing profile-button">
+          <span class="white-text-font">Annonces</span>
+          <span class="count-box">{{countOFAnnonces}}</span>
+        </a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+          <a class="btn btn-primary btn-block spacing profile-button"><span class="white-text-font">Paramétres</span></a>
+      </div>
+      <div class="col-md-6">
+        <a class="btn btn-primary btn-block spacing profile-button"><span class="white-text-font">Messages</span></a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="card m-1">
+    <div class="card-body">
+      <app-filter></app-filter>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="border border-success search-result">
+    <span class="alert alert-info info-font" *ngIf="countOfAnnonces <= 1">{{countOfAnnonces}} annonce</span>
+    <span class="alert alert-info info-font" *ngIf="countOfAnnonces > 1">{{countOfAnnonces}} annonces</span>
+    <div *ngFor="let annonce of annonces" class="border annonce-style">
+      <a routerLink="/search-result/annonce/{{annonce.id}}" (click)="selectAnnonce(annonce)">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3">
+              <div *ngIf="annonce.images[0]['url']">
+                <img class="img-fluid image_thumb" src='http://localhost:8080/img/{{annonce.images[0]["url"]}}' alt="c">
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="row">
+                  <div class="col-lg-8">
+                    <div class="h3">
+                      {{annonce.vehicle.model.marque.marqueName}} {{annonce.vehicle.model.modelName}} - <span class="head_text">{{annonce.vehicle.year.productionDate}}</span>
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <span class="text-muted">
+                      {{annonce.modifDate}}
+                    </span>
+                  </div>
+                </div>
+                  <div class="row">
+                    <div class="col-lg-6"><b>km:</b> <span class="main-text-font">{{annonce.vehicle.km}}</span></div>
+                    <div class="col-lg-6"><b>color:</b><span class="main-text-font">black</span></div>
+                    <div class="row"></div>
+                    <div class="col-lg-6"><b>boite:</b><span class="main-text-font">{{annonce.vehicle.gearbox.boxName}}</span></div>
+                    <div class="col-lg-6"><b>année:</b><span class="main-text-font">{{annonce.vehicle.year.productionDate}}</span></div>
+                  </div>
+            </div>
+            <div class="col-lg-3 price-col">
+              <div class="row">
+                <div class="col-lg-12">
+                  <span class="font-30 head_text"><b>&euro; </b>{{annonce.vehicle.price.amount}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>

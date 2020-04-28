@@ -1,0 +1,16 @@
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: #273952;
+}
+
+.head_text {
+  color: red;
+}
+
+.price-col {
+  padding: 10px;
+  border-left: 1px solid #c1c1c1;
+}
