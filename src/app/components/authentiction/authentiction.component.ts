@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from "../../service/authentication.service";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {SharingService} from "../../service/outil/sharing.service";
+import {constructExclusionsMap} from "tslint/lib/rules/completed-docs/exclusions";
 
 @Component({
   selector: 'app-authentiction',
@@ -14,7 +16,12 @@ export class AuthentictionComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthenticationService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private sharingService: SharingService,
+    private authService: AuthenticationService
+  ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
@@ -48,4 +55,7 @@ export class AuthentictionComponent implements OnInit {
     this.submitted = true;
   }
 
+  catchRegEvent() {
+    return this.sharingService.getObj() === "regSuccess";
+  }
 }

@@ -20,9 +20,9 @@
     </div>
   </div>
 
-  <div class="row">
+  <div *ngIf="first10Annonces.length > 0" class="row">
     <div class="slider-new-10">
-      <div *ngIf="first10Annonces.length > 0" class="thumbs">
+      <div class="thumbs">
         <ul>
           <li class="border" *ngFor="let annonce of first10Annonces">
             <div class="annonce-block" (click)="selectAnnonce(annonce)">
@@ -36,7 +36,11 @@
     </div>
   </div>
 </div>
-  <div style="height: 400px">
+<div style="height: 400px">
 
-  </div>
+</div>
 
+<div *ngIf="catchLogoutEvent()" id="hideMe" class="alert alert-success notification-window" data-auto-dismiss role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  Vous êtes maintenant déconnecté.
+</div>

@@ -1,0 +1,75 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <fa-icon class="icon" [icon]="faEdit"></fa-icon> <span class="head-text">CHOBAN COBANYAN</span>
+    </div>
+  </div>
+  <div class="row info-title">
+    <div class="col-lg-12">
+      <fa-icon class="icon" [icon]="faEdit"></fa-icon> <span id="username" class="simple-text-font user-info" *ngIf="clickedElemId !== 'username'" (click)="click($event)">MAKANUN</span>
+      <span *ngIf="clickedElemId === 'username'"><input class="form-control form-control-sm" value="MAKANUN" type="text" /><button (click)="click($event)">OK</button><button (click)="cancel($event)">Cancel</button></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-6">
+      <table class="table table-responsive table-bordered">
+        <tr>
+          <td>E-mail</td>
+          <td class="text-muted">
+            <span id="email" class="user-info" *ngIf="clickedElemId !== 'email'" (click)="click($event)"><fa-icon class="icon" [icon]="faEdit"></fa-icon> Coupé</span>
+            <span *ngIf="clickedElemId === 'email'"><input class="form-control form-control-sm" value="Coupé" type="text" /><button (click)="click($event)">OK</button><button (click)="cancel($event)">Cancel</button></span>
+          </td>
+        </tr>
+        <tr>
+          <td>Date de naissance</td>
+          <td class="text-muted">
+            <span id="naissance" class="user-info" *ngIf="clickedElemId !== 'naissance'" (click)="click($event)"><fa-icon class="icon" [icon]="faEdit"></fa-icon> 23/08/1980</span>
+            <span *ngIf="clickedElemId === 'naissance'"><input class="form-control form-control-sm" value="23/08/1980" type="text" /><button (click)="click($event)">OK</button><button (click)="cancel($event)">Cancel</button></span>
+          </td>
+        </tr>
+        <tr>
+          <td>Date d'inscription</td>
+          <td class="text-muted">
+            <span class="user-info">21/10/2019</span>
+          </td>
+        </tr>
+        <tr>
+          <td>Derniere modification</td>
+          <td class="text-muted">
+            <span class="user-info">21/12/2019</span>
+          </td>
+        </tr>
+        <tr>
+          <td>Voiture préféré</td>
+          <td class="text-muted">
+            <span class="user-info">BMW</span>
+          </td>
+        </tr>
+        <tr>
+          <td>Points</td>
+          <td class="text-muted">
+            <span class="user-info">127</span>
+          </td>
+        </tr>
+        <tr>
+          <td>Mot de pass</td>
+          <td class="text-muted">
+            <span id="pass" class="user-info" *ngIf="clickedElemId !== 'pass'" (click)="click($event)">**********</span>
+            <span *ngIf="clickedElemId === 'pass'"><input class="form-control form-control-sm" type="password" /><button (click)="cancel($event)">Cancel</button></span>
+          </td>
+        </tr>
+        <tr *ngIf="clickedElemId === 'pass'">
+          <td>Confirmer mot de pass</td>
+          <td class="text-muted">
+            <span><input class="form-control form-control-sm" type="password" /><button (click)="click($event)">OK</button></span>
+          </td>
+        </tr>
+        <tr>
+          <td><button class="btn btn-danger" (click)="deleteAccount()">Supprimer le compte</button></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+
+</div>

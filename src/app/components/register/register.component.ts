@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {RegistrationService} from "../../service/data/user/registration.service";
 import {Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {SharingService} from "../../service/outil/sharing.service";
 
 export function MustMatch(controlName: string, matchingControlName: string) {
   return (formGroup: FormGroup) => {
@@ -38,7 +39,12 @@ export class RegisterComponent implements OnInit {
   submitted = false;
 
 
-  constructor(private formBuilder: FormBuilder, private regService: RegistrationService, private router: Router) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private regService: RegistrationService,
+    private router: Router,
+    private sharingService: SharingService
+    ) {
     this.regForm = this.formBuilder.group({
       userName: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._-]{3,}$')]],
       email: ['', [Validators.required, Validators.email]],
@@ -57,14 +63,14 @@ export class RegisterComponent implements OnInit {
 
   handleRegistration() {
     if(this.regForm.valid) {
-      this.regService.userRegistration(this.regForm.value['email'], this.regForm.value['userName'], this.regForm.value['password'], this.regForm.value['passwordConfirm'])
+      this.regService.userRegistration(this.regForm.value['email'].trim(), this.regForm.value['userName'].trim(), this.regForm.value['password'], this.regForm.value['passwordConfirm'])
         .subscribe(
           data => {
+            this.sharingService.shareObj("regSuccess");
             this.router.navigate(['auth']);
             this.registrationFail = false;
           },
           error => {
-            console.log("error");
             this.errorMessage = error.error.message;
             this.registrationFail = true;
           }

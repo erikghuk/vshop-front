@@ -38,14 +38,17 @@ export class HttpIntercepterBasicAuthService implements HttpInterceptor{
         case 401:
           localStorage.clear();
           sessionStorage.clear();
-          sessionStorage.setItem("error", err.error.message);
-          //this.router.navigate(['unauthorized']);
+          sessionStorage.setItem("error-401", err.error.message);
           break;
         case 403:
           localStorage.clear();
           sessionStorage.clear();
-          sessionStorage.setItem("error", err.error.message);
-          //this.router.navigate(['forbidden']);
+          sessionStorage.setItem("error-403", err.error.message);
+          break;
+        case 406:
+          localStorage.clear();
+          sessionStorage.clear();
+          sessionStorage.setItem("error-406", "Le format .jpg, .png ");
           break;
         default:
           return;

@@ -27,7 +27,7 @@
       <div class="main-image-div">
         <img class="main-image" src="http://localhost:8080/img/{{selectedImage}}" alt="">
       </div>
-      <div class="thumbs">
+      <div class="thumbs" *ngIf="annonce.images.length > 1">
         <ul>
           <li *ngFor="let image of annonce.images">
             <img class="image-thumbs" src="http://localhost:8080/img/{{image['url']}}" alt="" (click)="showImage(image)">

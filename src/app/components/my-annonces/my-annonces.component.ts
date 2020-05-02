@@ -75,13 +75,14 @@ export class MyAnnoncesComponent implements OnInit {
     this.deleteButtonClicked = false;
   }
 
+  cancelDelete() {
+    this.deleteButtonClicked = false;
+    this.IDdeleteButtonClicked= -1;
+  }
+
   updateAnnonce(annonceId) {
     sessionStorage.setItem("curan_id", annonceId);
     this.router.navigate(['profile/u-annonces/upd']);
   }
 
-  cancelDelete() {
-    this.deleteButtonClicked = false;
-    this.IDdeleteButtonClicked= -1;
-  }
 }

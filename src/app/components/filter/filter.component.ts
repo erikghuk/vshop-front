@@ -58,7 +58,6 @@ export class FilterComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private sharingService: SharingService,
     private router: Router,
     private marqueService: MarqueService,
     private modelService: ModelService,

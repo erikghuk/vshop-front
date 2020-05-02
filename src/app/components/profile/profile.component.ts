@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserInfoService} from "../../service/data/user/user-info.service";
 import {AnnoncesService} from "../../service/data/annonce/annonces.service";
-import {Router} from "@angular/router";
 import {Annonce} from "../../common/annonce";
 
 @Component({
@@ -15,12 +14,17 @@ export class ProfileComponent implements OnInit {
   annonces: Annonce[];
   countOFAnnonces: number = 0;
 
-  constructor(private userInfoService: UserInfoService, private annonceService: AnnoncesService, private router: Router) { }
+  constructor(
+    private userInfoService: UserInfoService,
+    private annonceService: AnnoncesService
+  ) { }
 
   ngOnInit(): void {
       this.annonceService.getCountById().subscribe(
-        count => this.getCountOfAnnonces(count),
-        error => this.noAnnonces(error)
+        count => {
+          this.getCountOfAnnonces(count);
+        },
+        error => window.location.reload()
       );
 
       this.userInfoService.getInfos()
@@ -28,6 +32,8 @@ export class ProfileComponent implements OnInit {
           response => this.handleResponse(response),
           error => this.handleError(error)
         );
+
+
   }
 
   private getCountOfAnnonces(result) {
@@ -52,12 +58,5 @@ export class ProfileComponent implements OnInit {
   private noAnnonces(result) {
     this.countOFAnnonces = 0;
     this.annonces = [];
-  }
-
-  count() {
-    this.annonceService.getCountById().subscribe(
-      count => this.getCountOfAnnonces(count),
-      error => this.noAnnonces(error)
-    );
   }
 }

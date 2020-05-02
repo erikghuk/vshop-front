@@ -1,0 +1,23 @@
+.user-info {
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  transition-duration: 250ms;
+}
+
+.user-info:hover {
+  background-color: #d6d6d6;
+}
+
+.table-bordered {
+  border-top: 1px solid #929292;
+  background-color: #e2e2e2;
+}
+
+.info-title {
+  margin-bottom: 20px;
+}
+
+.btn {
+  background-color: #d42838;
+}

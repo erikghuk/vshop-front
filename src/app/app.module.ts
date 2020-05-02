@@ -23,6 +23,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MyAnnoncesComponent } from './components/my-annonces/my-annonces.component';
 import { UpdAnnonceComponent } from './components/upd-annonce/upd-annonce.component';
 import { ReceptionImageComponent } from './components/reception-image/reception-image.component';
+import {ModalModule} from "ngx-bootstrap/modal";
+import { UserInfoComponent } from './components/user-info/user-info.component';
+
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { faSquare, faCheckSquare } from '@fortawesome/free-solid-svg-icons';
+
 
 const appRoutes = [
   {path: '', component: HomeComponent},
@@ -33,6 +39,7 @@ const appRoutes = [
   {path: 'profile/u-annonces/upd', component: UpdAnnonceComponent, canActivate:[RouteGuardService]},
   {path: 'search-result/:data', component: ResultSearchComponent},
   {path: 'search-result/annonce/:adId', component: AnnonceDisplayComponent},
+  {path: 'profile/u-params', component: UserInfoComponent, canActivate: [RouteGuardService]},
   {path: 'add-annonce', component: AnnonceComponent, canActivate:[RouteGuardService]},
   {path: 'logout', component: LogoutComponent, canActivate:[RouteGuardService]},
   {path: '**', component: NotFoundComponent}
@@ -55,17 +62,20 @@ const appRoutes = [
     AnnonceDisplayComponent,
     MyAnnoncesComponent,
     UpdAnnonceComponent,
-    ReceptionImageComponent
+    ReceptionImageComponent,
+    UserInfoComponent
   ],
   imports: [
     NgbModule,
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    BrowserModule, ModalModule.forRoot(),
     RouterModule.forRoot(appRoutes, {
       anchorScrolling: 'enabled'
     }),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FontAwesomeModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpIntercepterBasicAuthService, multi: true}

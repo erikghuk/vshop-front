@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {AnnoncesService} from "../../service/data/annonce/annonces.service";
 import {Annonce} from "../../common/annonce";
-import {ImageUrl} from "../../common/image-url";
 import {Router} from "@angular/router";
+import {AuthenticationService} from "../../service/authentication.service";
+import {SharingService} from "../../service/outil/sharing.service";
 
 @Component({
   selector: 'app-home',
@@ -11,11 +12,15 @@ import {Router} from "@angular/router";
 })
 export class HomeComponent implements OnInit {
   first10Annonces: Annonce[] = [];
-  currentThumbnailImage: string;
+
   constructor(
+    private sharingService: SharingService,
+    private authService: AuthenticationService,
     private annonceService: AnnoncesService,
     private router: Router
-  ) { }
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.annonceService.getNew10Annonces().subscribe(
@@ -24,12 +29,13 @@ export class HomeComponent implements OnInit {
       },
       error => this.first10Annonces = []
     );
+
   }
+
 
   selectAnnonce(annonce: Annonce) {
     sessionStorage.removeItem("lastSelectedAnnonce");
     sessionStorage.setItem("lastSelectedAnnonce", JSON.stringify(annonce));
-    localStorage.clear();
     this.router.navigate(["search-result/annonce/" + annonce.id])
   }
 
@@ -39,5 +45,9 @@ export class HomeComponent implements OnInit {
 
   right() {
     this.first10Annonces.unshift(this.first10Annonces.pop());
+  }
+
+  catchLogoutEvent() {
+    return this.sharingService.getObj()
   }
 }

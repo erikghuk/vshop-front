@@ -16,6 +16,7 @@ import {IMAGES_MAX_COUNT} from "../../app.constants";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 
+
 @Component({
   selector: 'app-annonce',
   templateUrl: './annonce.component.html',
@@ -71,13 +72,13 @@ export class AnnonceComponent implements OnInit {
     this.year = new Year();
 
     this.annonceForm = this.formBuilder.group({
-      title: ['', [Validators.required]],
-      descr: ['', [Validators.required]],
+      title: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^[a-zA-Zàâçéèêëîïôûùüÿñæœ0-9 !-/,.?_#$%*()]+$/i)]],
+      descr: ['', [Validators.required, Validators.minLength(30), Validators.pattern(/^[a-zA-Zàâçéèêëîïôûùüÿñæœ0-9 !-/,.?_#$%^&*()]+$/i)]],
       marque: ['', [Validators.required]],
       model: ['', Validators.required],
-      year: ['', Validators.required],
-      price: ['', Validators.required],
-      km: ['', Validators.required],
+      year: ['', [Validators.required, Validators.min(1920), Validators.max(new Date().getFullYear()), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      price: ['', [Validators.required, Validators.min(0), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
+      km: ['', [Validators.required, Validators.min(0), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       box: ['', Validators.required]
     });
   }
@@ -95,18 +96,24 @@ export class AnnonceComponent implements OnInit {
     return this.annonceForm.controls; }
 
   selectFile(event) {
-    if (event.target.files.length > 0 && event.target.files.length < IMAGES_MAX_COUNT) {
+    if (event.target.files.length < IMAGES_MAX_COUNT) {
       this.nameOfFileInput = [];
       this.imageArr = [];
       for (let i = 0; i < event.target.files.length; i++) {
         let image = event.target.files[i];
-        this.imageUrl = new ImageUrl();
-        this.imageUrl.urlName = image;
-        this.imageArr.push(this.imageUrl);
-        this.nameOfFileInput.push(" " + image['name']);
+        let ext = image['name'].split(".")[image['name'].split(".").length-1];
+        if(ext === "jpg" || ext === "png") {
+          this.errorImageCount = null;
+          this.imageUrl = new ImageUrl();
+          this.imageUrl.urlName = image;
+          this.imageArr.push(this.imageUrl);
+          this.nameOfFileInput.push(" " + image['name']);
+        } else {
+          this.errorImageCount = "le fichier " + image['name'] + " n'est pas été accepté. Format n'est pas valid";
+        }
       }
     } else {
-      this.errorImageCount = "Max nombre des images atteint le maximum"
+      this.errorImageCount = 'Max nombre des images est ' + IMAGES_MAX_COUNT;
     }
   }
 
@@ -119,13 +126,11 @@ export class AnnonceComponent implements OnInit {
       this.vehicle.year = this.year;
       this.vehicle.price = this.price;
 
-      this.annonce.title = this.annonceForm.value['title'];
-      this.annonce.description = this.annonceForm.value['descr'];
+      this.annonce.title = this.cleanup(this.annonceForm.value['title']);
+      this.annonce.description = this.cleanup(this.annonceForm.value['descr']);
       this.annonce.vehicle = this.vehicle;
 
-
       let formData = new FormData();
-
       formData.append('annonce', new Blob([JSON.stringify(this.annonce)], {
         type: "application/json"
       }));
@@ -153,6 +158,9 @@ export class AnnonceComponent implements OnInit {
         data => {
           this.marque.marqueName = data.marqueName;
           this.marque.id = data.id;
+        },
+        error => {
+          window.location.reload();
         }
       );
 
@@ -160,7 +168,10 @@ export class AnnonceComponent implements OnInit {
         this.models = null;
       } else {
         this.modelService.getModelsList(marqueFromOption).subscribe(
-          modelResponse => this.models = modelResponse
+          modelResponse => this.models = modelResponse,
+          error => {
+            window.location.reload();
+          }
         );
       }
     }
@@ -186,4 +197,8 @@ export class AnnonceComponent implements OnInit {
   selectYear() {
     this.year.productionDate = this.annonceForm.value['year'];
   }
+
+  private cleanup(message: string) {
+    return message.trim().replace(/  +/g, ' ');
+  };
 }
