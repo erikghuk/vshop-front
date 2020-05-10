@@ -72,8 +72,8 @@ export class AnnonceComponent implements OnInit {
     this.year = new Year();
 
     this.annonceForm = this.formBuilder.group({
-      title: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^[a-zA-Zàâçéèêëîïôûùüÿñæœ0-9 !-/,.?_#$%*()]+$/i)]],
-      descr: ['', [Validators.required, Validators.minLength(30), Validators.pattern(/^[a-zA-Zàâçéèêëîïôûùüÿñæœ0-9 !-/,.?_#$%^&*()]+$/i)]],
+      title: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^[a-zA-Zàâçéèêëîïôûùüÿñæœ0-9 !-/,.:?_'"#$%*()]+$/i)]],
+      descr: ['', [Validators.required, Validators.minLength(30), Validators.pattern(/^[\sa-zA-Zàâçéèêëîïôûùüÿñæœ0-9 !-/,.:?_'"#@$%^&*()]+$/i)]],
       marque: ['', [Validators.required]],
       model: ['', Validators.required],
       year: ['', [Validators.required, Validators.min(1920), Validators.max(new Date().getFullYear()), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],

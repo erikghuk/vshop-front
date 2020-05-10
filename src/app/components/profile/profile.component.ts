@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserInfoService} from "../../service/data/user/user-info.service";
 import {AnnoncesService} from "../../service/data/annonce/annonces.service";
 import {Annonce} from "../../common/annonce";
+import {UserInfo} from "../../common/user-info";
 
 @Component({
   selector: 'app-profile',
@@ -9,6 +10,7 @@ import {Annonce} from "../../common/annonce";
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  userInfo: UserInfo;
   message: string;
   errorName: string;
   annonces: Annonce[];
@@ -17,7 +19,9 @@ export class ProfileComponent implements OnInit {
   constructor(
     private userInfoService: UserInfoService,
     private annonceService: AnnoncesService
-  ) { }
+  ) {
+    this.userInfo = new UserInfo();
+  }
 
   ngOnInit(): void {
       this.annonceService.getCountById().subscribe(
@@ -41,13 +45,14 @@ export class ProfileComponent implements OnInit {
   }
 
   handleResponse(response) {
-    if(response == null) {
+    if(response == null || ( response.firstName === ' ' && response.lastName === ' ')) {
       this.userInfoService.getUser().subscribe (
         response => this.message = response.userName,
         error => console.log("UserName problem from server: Look this error ===>>> " + error)
       )
     } else {
-      this.message = response.firstName + ' ' + response.lastName;
+      this.userInfo.firstName = response.firstName;
+      this.userInfo.lastName = response.lastName;
     }
   }
 

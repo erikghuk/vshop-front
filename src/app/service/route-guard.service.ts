@@ -14,7 +14,7 @@ export class RouteGuardService implements CanActivate{
       return true;
     }
 
-    this.router.navigate(["auth"]);
+    this.router.navigate(["auth"],{queryParams:{'redirectURL':state.url}});
     return false;
   }
 }

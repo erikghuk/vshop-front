@@ -19,7 +19,7 @@ import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
   styleUrls: ['./filter.component.css']
 })
 export class FilterComponent implements OnInit {
-  modelListHeadMessage = "< Choisissez";
+  modelListHeadMessage = "⮜ Choisissez";
   advanceSearchLink: string = "Recherche avancée";
   visibility: boolean = true;
 

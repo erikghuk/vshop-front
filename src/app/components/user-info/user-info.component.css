@@ -6,7 +6,7 @@
 }
 
 .user-info:hover {
-  background-color: #d6d6d6;
+  background-color: #f0f0f0;
 }
 
 .table-bordered {
@@ -14,10 +14,42 @@
   background-color: #e2e2e2;
 }
 
-.info-title {
-  margin-bottom: 20px;
+.danger {
+  background-color: #d42838;
 }
 
 .btn {
-  background-color: #d42838;
+  margin-top: 10px;
+}
+
+.alert {
+  font-size: 14px;
+}
+
+.container {
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  background-color: white;
+  padding: 20px;
+}
+
+.calendar {
+  cursor: text;
+}
+
+
+input::-webkit-calendar-picker-indicator{
+  display: none;
+}
+input[type="date"]::-webkit-input-placeholder{
+  visibility: hidden !important;
+}
+
+.auth {
+  background-color: #f2fbf2;
+}
+
+.form-block {
+  padding: 20px;
 }

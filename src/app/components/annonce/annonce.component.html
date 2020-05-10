@@ -1,137 +1,139 @@
-<div class="card m-3">
-  <h3 class="card-header">Nouvelle annonce</h3>
-  <div class="card-body">
-    <form [formGroup]="annonceForm" (ngSubmit)="annonceUpload()" enctype="multipart/form-data">
-      <div class="container">
-        <div class="form-row top-space">
-          <div class="col-lg-8 s">
-            <label for="title"><span class="main-text-font">Title</span></label>
-            <input formControlName="title" class="form-control form-control-sm" type="text" id="title" name="title"  [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
-            <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
-              <div *ngIf="f.title.errors.required">Titre obligatoire</div>
-              <div *ngIf="f.title.errors.pattern">Des characteres speciales ne sont pas authorisées</div>
-              <div *ngIf="f.title.errors.minlength">Le titre est trop court. Min 5 simbols</div>
+<div class="container">
+  <div class="card m-3">
+    <h3 class="card-header">Nouvelle annonce</h3>
+    <div class="card-body">
+      <form [formGroup]="annonceForm" (ngSubmit)="annonceUpload()" enctype="multipart/form-data">
+        <div class="container">
+          <div class="form-row top-space">
+            <div class="col-lg-8 s">
+              <label for="title"><span class="main-text-font">Title</span></label>
+              <input formControlName="title" class="form-control form-control-sm" type="text" id="title" name="title"  [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+              <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                <div *ngIf="f.title.errors.required">Titre obligatoire</div>
+                <div *ngIf="f.title.errors.pattern">Des characteres speciales ne sont pas authorisées</div>
+                <div *ngIf="f.title.errors.minlength">Le titre est trop court. Min 5 simbols</div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-row top-space">
-          <div class="col-lg-8">
-            <label for="descr"><span class="main-text-font">Description</span></label>
-            <textarea formControlName="descr" rows="10" class="form-control form-control-sm" id="descr" name="descr" [ngClass]="{ 'is-invalid': submitted && f.descr.errors }"></textarea>
-            <div *ngIf="submitted && f.descr.errors" class="invalid-feedback">
-              <div *ngIf="f.descr.errors.required">Description obligatoire</div>
-              <div *ngIf="f.descr.errors.pattern">Des characteres speciales ne sont pas authorisées</div>
-              <div *ngIf="f.descr.errors.minlength">Le titre est trop court. Min 30 simbols</div>
+          <div class="form-row top-space">
+            <div class="col-lg-8">
+              <label for="descr"><span class="main-text-font">Description</span></label>
+              <textarea formControlName="descr" rows="10" class="form-control form-control-sm" id="descr" name="descr" [ngClass]="{ 'is-invalid': submitted && f.descr.errors }"></textarea>
+              <div *ngIf="submitted && f.descr.errors" class="invalid-feedback">
+                <div *ngIf="f.descr.errors.required">Description obligatoire</div>
+                <div *ngIf="f.descr.errors.pattern">Des characteres speciales ne sont pas authorisées</div>
+                <div *ngIf="f.descr.errors.minlength">Le titre est trop court. Min 30 simbols</div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="form-row top-space">
-          <div class="form-group col-lg-3">
-            <!-- Marque -->
-            <label for="marque"><span class="main-text-font">Marque</span></label>
-            <select formControlName="marque" name="marque" class="form-control form-control-sm" id="marque" *ngIf="marques; else disabledList" (change)="selectMarque($event)" [ngClass]="{ 'is-invalid': submitted && f.marque.errors }">
-              <option class="text-muted" value ="">Choisissez</option>
-              <option *ngFor="let m of marques" [value]="m['id']">{{m['marqueName']}}</option>
-            </select>
-            <ng-template #disabledList>
-                <select class="form-control form-control-sm" disabled>
-                  <option>Choisissez</option>
-                </select>
-            </ng-template>
-            <div *ngIf="submitted && f.marque.errors" class="invalid-feedback">
-              <div *ngIf="f.marque.errors.required">Le marque de vehicule est obligatoire</div>
-            </div>
-          </div>
-
-          <!-- select model -->
-          <div class="form-group col-lg-2">
-            <label for="model"><span class="main-text-font">Model</span></label>
-            <select formControlName="model" class="form-control form-control-sm" id="model" *ngIf="models; else elseBlock2" (change)="selectModel()" [ngClass]="{ 'is-invalid': submitted && f.model.errors }">
-              <option value="">Choisissez</option>
-              <option *ngFor="let m of models" [value]="m['modelName']">{{m['modelName']}}</option>
-            </select>
-            <ng-template #elseBlock2>
-                <select class="form-control form-control-sm" disabled>
-                  <option>Choisissez</option>
-                </select>
-            </ng-template>
-            <div *ngIf="submitted && f.model.errors" class="invalid-feedback">
-              <div *ngIf="f.model.errors.required">Le model de vehicule est obligatoire</div>
-            </div>
-          </div>
-
-          <!-- select gearBox -->
-          <div class="form-group col-lg-3">
-            <label for="box"><span class="main-text-font">Boite de vitesse</span></label>
-            <select formControlName="box" class="form-control form-control-sm" id="box" *ngIf="gearboxes; else elseBlock2" (change)="selectBox()" [ngClass]="{ 'is-invalid': submitted && f.box.errors }">
-              <option value="">Choisissez</option>
-              <option *ngFor="let m of gearboxes" [value]="m['boxName']">{{m['boxName']}}</option>
-            </select>
-            <ng-template #elseBlock2>
-              <select class="form-control form-control-sm">
-                <option>Choisissez</option>
+          <div class="form-row top-space">
+            <div class="form-group col-lg-3">
+              <!-- Marque -->
+              <label for="marque"><span class="main-text-font">Marque</span></label>
+              <select formControlName="marque" name="marque" class="form-control form-control-sm" id="marque" *ngIf="marques; else disabledList" (change)="selectMarque($event)" [ngClass]="{ 'is-invalid': submitted && f.marque.errors }">
+                <option class="text-muted" value ="">Choisissez</option>
+                <option *ngFor="let m of marques" [value]="m['id']">{{m['marqueName']}}</option>
               </select>
-            </ng-template>
-            <div *ngIf="submitted && f.box.errors" class="invalid-feedback">
-              <div *ngIf="f.box.errors.required">Le marque de vehicule est obligatoire</div>
+              <ng-template #disabledList>
+                  <select class="form-control form-control-sm" disabled>
+                    <option>Choisissez</option>
+                  </select>
+              </ng-template>
+              <div *ngIf="submitted && f.marque.errors" class="invalid-feedback">
+                <div *ngIf="f.marque.errors.required">Le marque de vehicule est obligatoire</div>
+              </div>
+            </div>
+
+            <!-- select model -->
+            <div class="form-group col-lg-2">
+              <label for="model"><span class="main-text-font">Model</span></label>
+              <select formControlName="model" class="form-control form-control-sm" id="model" *ngIf="models; else elseBlock2" (change)="selectModel()" [ngClass]="{ 'is-invalid': submitted && f.model.errors }">
+                <option value="">Choisissez</option>
+                <option *ngFor="let m of models" [value]="m['modelName']">{{m['modelName']}}</option>
+              </select>
+              <ng-template #elseBlock2>
+                  <select class="form-control form-control-sm" disabled>
+                    <option>Choisissez</option>
+                  </select>
+              </ng-template>
+              <div *ngIf="submitted && f.model.errors" class="invalid-feedback">
+                <div *ngIf="f.model.errors.required">Le model de vehicule est obligatoire</div>
+              </div>
+            </div>
+
+            <!-- select gearBox -->
+            <div class="form-group col-lg-3">
+              <label for="box"><span class="main-text-font">Boite de vitesse</span></label>
+              <select formControlName="box" class="form-control form-control-sm" id="box" *ngIf="gearboxes; else elseBlock2" (change)="selectBox()" [ngClass]="{ 'is-invalid': submitted && f.box.errors }">
+                <option value="">Choisissez</option>
+                <option *ngFor="let m of gearboxes" [value]="m['boxName']">{{m['boxName']}}</option>
+              </select>
+              <ng-template #elseBlock2>
+                <select class="form-control form-control-sm">
+                  <option>Choisissez</option>
+                </select>
+              </ng-template>
+              <div *ngIf="submitted && f.box.errors" class="invalid-feedback">
+                <div *ngIf="f.box.errors.required">Le marque de vehicule est obligatoire</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row top-space">
+            <div class="form-group col-lg-2">
+              <!-- Price -->
+              <label for="price"><span class="main-text-font">Prix</span></label>
+
+              <input formControlName="price" class="form-control form-control-sm" type="number" id="price" step="100" min="0" max="2000000" name="price"  (change)="selectPrice()"  [ngClass]="{ 'is-invalid': submitted && f.price.errors }">
+              <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+                <div *ngIf="f.price.errors.required">Le prix de vehicule est obligatoire</div>
+                <div *ngIf="f.price.errors.pattern">Que des chifres sont authorisées</div>
+                <div *ngIf="f.price.errors.min">Le prix ne peut pas avoire le value negative</div>
+              </div>
+            </div>
+
+            <div class="form-group col-lg-2">
+              <!-- Year -->
+              <label for="year"><span class="main-text-font">Année</span></label>
+
+              <input formControlName="year" class="form-control form-control-sm" type="number" id="year" step="1" min="1920" max="2020" name="year" (change)="selectYear()" [ngClass]="{ 'is-invalid': submitted && f.year.errors }">
+              <div *ngIf="submitted && f.year.errors" class="invalid-feedback">
+                <div *ngIf="f.year.errors.required">L'année d'immatriculation de vehicule est obligatoire</div>
+                <div *ngIf="f.year.errors.pattern">Que des chifres sont authorisées</div>
+                <div *ngIf="f.year.errors.min">L'année ne peut pas être moins de 1920</div>
+                <div *ngIf="f.year.errors.max">Le année ne peut pas être superieur de la date actuelle</div>
+              </div>
+            </div>
+
+            <div class="form-group col-lg-4">
+              <!-- Km -->
+              <label for="km"><span class="main-text-font">Kilométrage</span></label>
+              <input formControlName="km" class="form-control form-control-sm" type="number" id="km" step="10" min="0" max="2000000" name="km" [ngClass]="{ 'is-invalid': submitted && f.km.errors }">
+              <div *ngIf="submitted && f.km.errors" class="invalid-feedback">
+                <div *ngIf="f.km.errors.required">Le kilométrage de vehicule est obligatoire</div>
+                <div *ngIf="f.km.errors.pattern">Que des chifres sont authorisées</div>
+                <div *ngIf="f.km.errors.min">Le kilométrage ne peut pas avoire le value negative</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row top-space">
+            <div class="form-group col-md-8">
+              <div class="alert alert-danger" *ngIf="errorImageCount">{{errorImageCount}}</div>
+              <div class="custom-file">
+                <input multiple type="file" class="custom-file-input" id="imageFile" name="imageFile" lang="fr" (change)="selectFile($event)">
+                <label class="custom-file-label" for="imageFile">{{nameOfFileInput}}</label>
+                <span class="help-block">format des images .jpg, .png</span>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class=" col-md-6">
+              <button type="submit" class="btn btn-success annonce-add" (click)="addAnnonce()">Ajouter</button>
             </div>
           </div>
         </div>
-
-        <div class="form-row top-space">
-          <div class="form-group col-lg-2">
-            <!-- Price -->
-            <label for="price"><span class="main-text-font">Prix</span></label>
-
-            <input formControlName="price" class="form-control form-control-sm" type="number" id="price" step="100" min="0" max="2000000" name="price"  (change)="selectPrice()"  [ngClass]="{ 'is-invalid': submitted && f.price.errors }">
-            <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
-              <div *ngIf="f.price.errors.required">Le prix de vehicule est obligatoire</div>
-              <div *ngIf="f.price.errors.pattern">Que des chifres sont authorisées</div>
-              <div *ngIf="f.price.errors.min">Le prix ne peut pas avoire le value negative</div>
-            </div>
-          </div>
-
-          <div class="form-group col-lg-2">
-            <!-- Year -->
-            <label for="year"><span class="main-text-font">Année</span></label>
-
-            <input formControlName="year" class="form-control form-control-sm" type="number" id="year" step="1" min="1920" max="2020" name="year" (change)="selectYear()" [ngClass]="{ 'is-invalid': submitted && f.year.errors }">
-            <div *ngIf="submitted && f.year.errors" class="invalid-feedback">
-              <div *ngIf="f.year.errors.required">L'année d'immatriculation de vehicule est obligatoire</div>
-              <div *ngIf="f.year.errors.pattern">Que des chifres sont authorisées</div>
-              <div *ngIf="f.year.errors.min">L'année ne peut pas être moins de 1920</div>
-              <div *ngIf="f.year.errors.max">Le année ne peut pas être superieur de la date actuelle</div>
-            </div>
-          </div>
-
-          <div class="form-group col-lg-4">
-            <!-- Km -->
-            <label for="km"><span class="main-text-font">Kilométrage</span></label>
-            <input formControlName="km" class="form-control form-control-sm" type="number" id="km" step="10" min="0" max="2000000" name="km" [ngClass]="{ 'is-invalid': submitted && f.km.errors }">
-            <div *ngIf="submitted && f.km.errors" class="invalid-feedback">
-              <div *ngIf="f.km.errors.required">Le kilométrage de vehicule est obligatoire</div>
-              <div *ngIf="f.km.errors.pattern">Que des chifres sont authorisées</div>
-              <div *ngIf="f.km.errors.min">Le kilométrage ne peut pas avoire le value negative</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="form-row top-space">
-          <div class="form-group col-md-8">
-            <div class="alert alert-danger" *ngIf="errorImageCount">{{errorImageCount}}</div>
-            <div class="custom-file">
-              <input multiple type="file" class="custom-file-input" id="imageFile" name="imageFile" lang="fr" (change)="selectFile($event)">
-              <label class="custom-file-label" for="imageFile">{{nameOfFileInput}}</label>
-              <span class="help-block">format des images .jpg, .png</span>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class=" col-md-6">
-            <button type="submit" class="btn btn-success annonce-add" (click)="addAnnonce()">Ajouter</button>
-          </div>
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 </div>

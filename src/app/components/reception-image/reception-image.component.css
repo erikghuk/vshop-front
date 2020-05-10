@@ -18,18 +18,16 @@
   border-radius: 4px;
   text-decoration: none;
   border: 2px solid #949494;
-  transition-duration: 200ms;
+  transition-duration: 70ms;
   background-color: #85ddf4;
-  opacity: 50%;
+  opacity: 60%;
 }
 
 
 .block:hover {
-  transform: scale(1.1);
-  opacity: 100%;
+  opacity: 80%;
   background-color: #5ac0d6;
   border-color: #1c1c1c;
-  box-shadow: 4px 4px 5px #111111;
 }
 
 .marque-buttons {

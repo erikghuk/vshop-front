@@ -3,8 +3,8 @@
     <h5 class="card-header">Connexion</h5>
     <div class="card-body">
       <form [formGroup]="loginForm" (ngSubmit)="handleLogin()">
-        <div class="form-group w-50">
-          <div class="alert alert-warning" *ngIf="invalidLoginPass && submitted">{{errorMessage}}</div>
+        <div class="form-group w-75">
+          <div class="alert alert-danger" *ngIf="invalidLoginPass && submitted">{{errorMessage}}</div>
           <label for="email"></label>
           Email: <input formControlName="email" type="text" class="form-control" name="email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" id="email" required autocomplete="true">
           <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
@@ -12,7 +12,7 @@
             <div *ngIf="f.email.errors.email">L'adresse email n'est pas valid</div>
           </div>
         </div>
-        <div class="form-group w-50">
+        <div class="form-group w-75">
           <label for="password"></label>
           Password: <input type="password" formControlName="password" class="form-control" name="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" id="password" required autocomplete="true">
           <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
@@ -31,6 +31,6 @@
 </div>
 
 <div *ngIf="catchRegEvent()" id="hideMe" class="alert alert-success notification-window" data-auto-dismiss role="alert">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <button (click)="closeCatchRegEvent()" type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   Vous êtes s'inscrit avec success
 </div>

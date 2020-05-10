@@ -1,22 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Vehicle} from "../../common/vehicle";
-import {GearBox} from "../../common/gear-box";
-import {Marque} from "../../common/marque";
-import {Model} from "../../common/model";
 import {Annonce} from "../../common/annonce";
 import {Year} from "../../common/year";
 import {Price} from "../../common/price";
 import {ImageUrl} from "../../common/image-url";
 import {IMAGES_MAX_COUNT} from "../../app.constants";
 import {ActivatedRoute, Router} from "@angular/router";
-import {AddAnnonceService} from "../../service/data/annonce/add-annonce.service";
-import {MarqueService} from "../../service/data/vehicule/marque.service";
-import {ModelService} from "../../service/data/vehicule/model.service";
-import {BoiteVitesseService} from "../../service/data/vehicule/boite-vitesse.service";
 import {AnnoncesService} from "../../service/data/annonce/annonces.service";
-import {removeSummaryDuplicates} from "@angular/compiler";
-import {serializeSummaries} from "@angular/compiler/src/aot/summary_serializer";
 
 @Component({
   selector: 'app-upd-annonce',
@@ -26,23 +17,11 @@ import {serializeSummaries} from "@angular/compiler/src/aot/summary_serializer";
 export class UpdAnnonceComponent implements OnInit {
   vehicle: Vehicle;
   title: string;
-  description: string;
   annonce: Annonce;
-
-  kilometrage: string;
-
   year: Year;
-
   price: Price;
-
-  imageUrl: ImageUrl;
-  imageArr: Array<ImageUrl> = [];
-
-  errorImageCount: string;
   annonceForm: FormGroup;
   submitted: boolean = false;
-  nameOfFileInput: string[] = [`Choisissez min 1 et max ${IMAGES_MAX_COUNT} images`];
-  default: string = "Choisissez";
   private annonceId: string;
 
   constructor(

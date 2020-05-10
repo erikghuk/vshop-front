@@ -1,6 +1,7 @@
 <div class="container">
-  <span class="display-4">{{message}}</span>
-  <div class="container border spacing">
+  <span *ngIf="message" class="display-4">{{message}}</span>
+  <span *ngIf="!message" class="display-4">{{userInfo.firstName}} {{userInfo.lastName}}</span>
+  <div class="border spacing">
     <div class="row">
       <div class="col-md-6">
         <a class="btn btn-primary btn-block spacing profile-button"><span class="white-text-font">Favorites</span></a>
@@ -14,7 +15,7 @@
     </div>
     <div class="row">
       <div class="col-md-6">
-          <a routerLink="u-params" class="btn btn-primary btn-block spacing profile-button"><span class="white-text-font">Paramétres</span></a>
+          <a routerLink="u-params" class="btn btn-primary btn-block spacing profile-button"><span class="white-text-font">Paramètres</span></a>
       </div>
       <div class="col-md-6">
         <a class="btn btn-primary btn-block spacing profile-button"><span class="white-text-font">Messages</span></a>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Annonce} from "../../common/annonce";
 import {AuthenticationService} from "../../service/authentication.service";
 import {Router} from "@angular/router";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-annonce-display',
@@ -15,6 +16,7 @@ export class AnnonceDisplayComponent implements OnInit {
   eyeSimbol: any = "\uD83D\uDC41";
 
   constructor(
+    private location: Location,
     private router: Router,
     private authService: AuthenticationService
   ) {
@@ -39,14 +41,13 @@ export class AnnonceDisplayComponent implements OnInit {
     if(this.authService.isUserLoggedIn()) {
       // navigate to contact page
     } else {
-
       this.router.navigate(["auth"]);
     }
 
   }
 
   backToSearchResult() {
-    this.router.navigate([window.history.back()]);
+    this.location.back();
   }
 
 }

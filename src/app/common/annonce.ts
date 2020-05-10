@@ -6,8 +6,8 @@ export class Annonce {
   id: number;
   title: string;
   description: string;
-  creationDate: Date;
-  modifDate: Date;
+  creationDate: string;
+  modifDate: string;
   vehicle: Vehicle;
   user: User;
   images: Array<ImageUrl>;

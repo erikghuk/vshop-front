@@ -28,6 +28,7 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
 
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faSquare, faCheckSquare } from '@fortawesome/free-solid-svg-icons';
+import { AdminPageComponent } from './components/admin/admin-page/admin-page.component';
 
 
 const appRoutes = [
@@ -63,7 +64,8 @@ const appRoutes = [
     MyAnnoncesComponent,
     UpdAnnonceComponent,
     ReceptionImageComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    AdminPageComponent
   ],
   imports: [
     NgbModule,

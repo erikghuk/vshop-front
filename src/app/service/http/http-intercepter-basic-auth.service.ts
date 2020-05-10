@@ -39,6 +39,7 @@ export class HttpIntercepterBasicAuthService implements HttpInterceptor{
           localStorage.clear();
           sessionStorage.clear();
           sessionStorage.setItem("error-401", err.error.message);
+          this.router.navigate(['auth']);
           break;
         case 403:
           localStorage.clear();

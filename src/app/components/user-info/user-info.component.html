@@ -1,75 +1,104 @@
-<div class="container">
-  <div class="row">
+<div class="container annonce-border">
+  <div class="form-row margin-bottom-20">
     <div class="col-lg-12">
-      <fa-icon class="icon" [icon]="faEdit"></fa-icon> <span class="head-text">CHOBAN COBANYAN</span>
-    </div>
-  </div>
-  <div class="row info-title">
-    <div class="col-lg-12">
-      <fa-icon class="icon" [icon]="faEdit"></fa-icon> <span id="username" class="simple-text-font user-info" *ngIf="clickedElemId !== 'username'" (click)="click($event)">MAKANUN</span>
-      <span *ngIf="clickedElemId === 'username'"><input class="form-control form-control-sm" value="MAKANUN" type="text" /><button (click)="click($event)">OK</button><button (click)="cancel($event)">Cancel</button></span>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-6">
-      <table class="table table-responsive table-bordered">
-        <tr>
-          <td>E-mail</td>
-          <td class="text-muted">
-            <span id="email" class="user-info" *ngIf="clickedElemId !== 'email'" (click)="click($event)"><fa-icon class="icon" [icon]="faEdit"></fa-icon> Coupé</span>
-            <span *ngIf="clickedElemId === 'email'"><input class="form-control form-control-sm" value="Coupé" type="text" /><button (click)="click($event)">OK</button><button (click)="cancel($event)">Cancel</button></span>
-          </td>
-        </tr>
-        <tr>
-          <td>Date de naissance</td>
-          <td class="text-muted">
-            <span id="naissance" class="user-info" *ngIf="clickedElemId !== 'naissance'" (click)="click($event)"><fa-icon class="icon" [icon]="faEdit"></fa-icon> 23/08/1980</span>
-            <span *ngIf="clickedElemId === 'naissance'"><input class="form-control form-control-sm" value="23/08/1980" type="text" /><button (click)="click($event)">OK</button><button (click)="cancel($event)">Cancel</button></span>
-          </td>
-        </tr>
-        <tr>
-          <td>Date d'inscription</td>
-          <td class="text-muted">
-            <span class="user-info">21/10/2019</span>
-          </td>
-        </tr>
-        <tr>
-          <td>Derniere modification</td>
-          <td class="text-muted">
-            <span class="user-info">21/12/2019</span>
-          </td>
-        </tr>
-        <tr>
-          <td>Voiture préféré</td>
-          <td class="text-muted">
-            <span class="user-info">BMW</span>
-          </td>
-        </tr>
-        <tr>
-          <td>Points</td>
-          <td class="text-muted">
-            <span class="user-info">127</span>
-          </td>
-        </tr>
-        <tr>
-          <td>Mot de pass</td>
-          <td class="text-muted">
-            <span id="pass" class="user-info" *ngIf="clickedElemId !== 'pass'" (click)="click($event)">**********</span>
-            <span *ngIf="clickedElemId === 'pass'"><input class="form-control form-control-sm" type="password" /><button (click)="cancel($event)">Cancel</button></span>
-          </td>
-        </tr>
-        <tr *ngIf="clickedElemId === 'pass'">
-          <td>Confirmer mot de pass</td>
-          <td class="text-muted">
-            <span><input class="form-control form-control-sm" type="password" /><button (click)="click($event)">OK</button></span>
-          </td>
-        </tr>
-        <tr>
-          <td><button class="btn btn-danger" (click)="deleteAccount()">Supprimer le compte</button></td>
-        </tr>
-      </table>
+      <span class="head-text user-info" id="name" (click)="click($event)" *ngIf="fullName && clickedElemId !== 'name'">{{fullName}} <fa-icon class="icon-small-small" [icon]="faEdit"></fa-icon></span>
+      <span class="text-muted user-info" id="name" (click)="click($event)" *ngIf="!fullName && clickedElemId !== 'name'">Saisissez votre nom et prénom <fa-icon class="icon-small-small" [icon]="faPlus"></fa-icon></span>
+
+      <span *ngIf="clickedElemId === 'name'">
+        <input class="form-control form-control-lg" type="text" [(ngModel)]="fullName"/>
+        <button class="btn btn-success" (click)="updateUserDetails($event)">OK</button>
+        <button class="btn btn-success" (click)="cancel()">Cancel</button>
+      </span>
     </div>
   </div>
 
+  <div class="form-block">
+    <div class="form-row margin-bottom-20">
+      <div class="col-lg-2">Date de naissance</div>
+      <div class="col-lg-6">
+        <span id="naissance" class="user-info" *ngIf="userInfo.dob && clickedElemId !== 'naissance'" (click)="click($event)">
+          {{userInfo.dob}} <fa-icon class="icon-small text-muted" [icon]="faEdit"></fa-icon>
+        </span>
+        <span class="text-muted user-info" id="naissance" (click)="click($event)" *ngIf="!userInfo.dob && clickedElemId !== 'naissance'">
+          Saisissez votre date de naissance <fa-icon class="icon-small-small" [icon]="faPlus"></fa-icon>
+        </span>
+        <span *ngIf="clickedElemId === 'naissance'">
+          <input (keyup)="dobCapture($event)"  type="text" pattern="^([0][1-9]|[1-2][0-9]|30|31)\/([0][1-9]|10|11|12)\/(19[0-9][0-9]|20[0-1][0-9]|2020)"
+                 inputmode="numeric" class="form-control"
+                 placeholder="dd/mm/yy" maxlength="10"  [(ngModel)]="dob" >
+          <span *ngIf="customMessage" class="alert alert-danger">{{customMessage}}</span><br/>
+          <button class="btn btn-success" (click)="updateUserDetails($event)">OK</button>
+          <button class="btn btn-success" (click)="cancel()">Cancel</button>
+        </span>
+      </div>
+    </div>
 
+    <div class="form-row margin-bottom-20">
+      <div class="col-lg-2">Username</div>
+      <div class="col-lg-6">
+        <span id="username" class="user-info" *ngIf="clickedElemId !== 'username'" (click)="click($event)">
+          {{user.userName}} <fa-icon class="icon-small text-muted" [icon]="faEdit"></fa-icon>
+        </span>
+        <span *ngIf="clickedElemId === 'username'">
+          <input class="form-control form-control-md" type="text" [(ngModel)]="user.userName"/>
+          <span *ngIf="customMessage"  class="alert alert-danger">{{customMessage}}</span>
+          <button class="btn btn-success" (click)="updateUser($event)">OK</button><button class="btn btn-success" (click)="cancel()">Cancel</button>
+        </span>
+      </div>
+    </div>
+
+    <div class="form-row margin-bottom-20">
+      <div class="col-lg-2">Date d'inscription</div>
+      <div class="col-lg-6">
+        <span class="user-info">{{user.dateRegistration}}</span>
+      </div>
+    </div>
+  </div>
+
+  <form class="auth form-block">
+    <div class="row form-group margin-bottom-20">
+      <div class="col-lg-2">E-mail</div>
+      <div class="col-lg-6">
+        <span id="email" class="user-info" *ngIf="clickedElemId !== 'email'" (click)="click($event)">
+          {{account.email}} <fa-icon class="icon-small text-muted" [icon]="faEdit"></fa-icon>
+        </span>
+        <div *ngIf="clickedElemId === 'email'">
+          <input autocomplete="off" name="email" class="form-control form-control-md" type="text" [(ngModel)]="account.email" />
+          <span *ngIf="!customMessage" class="help-block">Saisissez votre mot de passe et cliquez sur « Modifier »</span>
+          <span *ngIf="customMessage" class="alert alert-danger">{{customMessage}}</span><br/>
+          <input autocomplete="off" name="confirmationPassword" class="form-control form-control-md" type="password" placeholder="Password" [(ngModel)]="account.password" />
+          <button class="btn btn-success" (click)="updateAccount($event)">Modifier</button><button class="btn btn-success" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row form-group margin-bottom-20">
+      <div class="col-lg-2">Mot de pass</div>
+      <div class="col-lg-6">
+        <span id="pass" class="user-info" *ngIf="clickedElemId !== 'pass'" (click)="click($event)">**********</span>
+        <div *ngIf="clickedElemId === 'pass'">
+          <span *ngIf="customMessage" class="alert alert-danger">{{customMessage}}</span><br/>
+          <input autocomplete="off" name="oldPassword" placeholder="Ancient mot de pass" class="form-control form-control-md margin-bottom-10" type="password" [(ngModel)]="oldPass" />
+          <input autocomplete="off" name="newPassword" placeholder="Nouveau mot de pass" class="form-control form-control-md margin-bottom-10" type="password" [(ngModel)]="newPass" />
+          <input autocomplete="off" name="newPasswordConfirm" placeholder="Confirmez le mot de pass" class="form-control form-control-md margin-bottom-10" type="password" [(ngModel)]="newPassConfirm"/>
+          <button class="btn btn-success" (click)="updatePassword($event)">OK</button><button class="btn btn-success" (click)="cancel()">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row form-group margin-bottom-20">
+      <div *ngIf="!deleteEvent" class="col-lg-6"><button class="btn btn-danger danger" (click)="deleteAccount()">Supprimer le compte</button></div>
+      <div *ngIf="deleteEvent" class="col-lg-6">
+        <input class="form-control form-control-md" type="password" placeholder="Password" [(ngModel)]="passwordDelete" />
+        <span *ngIf="!customMessage" class="help-block">Saisissez votre mot de passe et cliquez sur « Confirmer »</span>
+        <span *ngIf="customMessage" class="alert alert-danger">{{customMessage}}</span><br/>
+        <button class="btn btn-danger danger" (click)="confirmDelete()">Confirmer</button>&nbsp;<button class="btn btn-danger danger" (click)="cancel()">Annuler</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="changementSuccess" id="hideMe" class="alert alert-success notification-window" data-auto-dismiss role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  Les changement son effectués avec success
 </div>

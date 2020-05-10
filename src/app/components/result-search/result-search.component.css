@@ -14,3 +14,14 @@ a:hover {
   padding: 10px;
   border-left: 1px solid #c1c1c1;
 }
+
+.filters {
+  float: right;
+  margin-right: 20px;
+  margin-top: 8px;
+}
+.btn-filters {
+  width: 200px;
+  background-color: #171717;
+  color: white;
+}

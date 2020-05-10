@@ -1,7 +1,7 @@
 <div class="card m-3">
   <h3 class="card-header">Modifier votre annonce</h3>
   <div class="card-body">
-    <form [formGroup]="annonceForm" (ngSubmit)="annonceUpdate()" enctype="multipart/form-data">
+    <form [formGroup]="annonceForm" (ngSubmit)="updateAnnonce()" enctype="multipart/form-data">
       <div class="container">
         <div class="form-row top-space">
           <div class="col-lg-8 s">
@@ -58,7 +58,7 @@
         </div>
         <div class="form-row">
           <div class=" col-md-6">
-            <button type="submit" class="btn btn-success annonce-add" (click)="updateAnnonce()">Enrégistrer</button>
+            <button type="submit" class="btn btn-success annonce-add">Enrégistrer</button>
             <button type="submit" class="btn btn-success annonce-add" (click)="cancel()">Annuler</button>
           </div>
         </div>

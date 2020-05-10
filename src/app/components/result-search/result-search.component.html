@@ -8,6 +8,17 @@
 
 <div class="container">
   <div class="border border-success search-result">
+
+    <div ngbDropdown class="d-inline-block filters">
+      <button class="btn btn-outline-light btn-filters" id="dropdownBasic1" ngbDropdownToggle>{{dropDowText}}</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button ngbDropdownItem *ngFor="let menuItem of sortOrders" (click)="sortByPrice(menuItem)">
+          {{menuItem}}
+        </button>
+
+      </div>
+    </div>
+
     <span class="alert alert-info info-font" *ngIf="countOfAnnonces <= 1">{{countOfAnnonces}} annonce</span>
     <span class="alert alert-info info-font" *ngIf="countOfAnnonces > 1">{{countOfAnnonces}} annonces</span>
     <div *ngFor="let annonce of annonces" class="border annonce-style">

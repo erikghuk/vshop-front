@@ -6,4 +6,5 @@ export class User {
   dateRegistration: Date;
   token: string;
   userInfo: UserInfo;
+
 }

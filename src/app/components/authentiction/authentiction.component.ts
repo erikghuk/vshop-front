@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from "../../service/authentication.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {SharingService} from "../../service/outil/sharing.service";
 import {constructExclusionsMap} from "tslint/lib/rules/completed-docs/exclusions";
@@ -15,8 +15,10 @@ export class AuthentictionComponent implements OnInit {
   errorMessage: String;
   loginForm: FormGroup;
   submitted = false;
+  private redirectURL: any;
 
   constructor(
+    private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private router: Router,
     private sharingService: SharingService,
@@ -34,11 +36,26 @@ export class AuthentictionComponent implements OnInit {
   }
 
   handleLogin() {
+    let email = this.loginForm.value['email'].toLowerCase();
+    let pass = this.loginForm.value['password'];
     if(this.loginForm.valid) {
-      this.authService.jwtAuthentication(this.loginForm.value['email'], this.loginForm.value['password'])
+      this.authService.jwtAuthentication(email, pass)
         .subscribe(
           data => {
-            this.router.navigate(['profile']);
+            // redirect the previous page after sign in
+            let params = this.route.snapshot.queryParams;
+            if (params['redirectURL']) {
+              this.redirectURL = params['redirectURL'];
+            }
+            if (this.redirectURL) {
+              this.router.navigateByUrl(this.redirectURL,)
+                .catch(() => this.router.navigate(['profile']))
+            } else {
+
+              this.router.navigate(['profile'])
+            }
+
+
             this.invalidLoginPass = false;
           },
           error => {
@@ -57,5 +74,9 @@ export class AuthentictionComponent implements OnInit {
 
   catchRegEvent() {
     return this.sharingService.getObj() === "regSuccess";
+  }
+
+  closeCatchRegEvent() {
+    this.sharingService.shareObj(null);
   }
 }
