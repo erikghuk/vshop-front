@@ -6,6 +6,7 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" style="text-align: right;" id="collapse_target" [ngbCollapse]="!isCollapsed">
           <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" *ngIf="authService.isAdmin" routerLink="admin">Admin</a></li>
             <li class="nav-item"><a class="nav-link" *ngIf="authService.isUserLoggedIn()" routerLink="/add-annonce">Déposer une annonce</a></li>
             <li class="nav-item"><a class="nav-link" *ngIf="authService.isUserLoggedIn()" routerLink="/profile">Profile</a></li>
             <li class="nav-item"><a class="nav-link" *ngIf="authService.isUserLoggedIn()" routerLink="/logout">Logout</a></li>

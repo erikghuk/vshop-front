@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {API_URL} from "../app.constants";
 import {map} from "rxjs/operators";
-import * as jwt_decode from 'jwt-decode';
+import {Router} from "@angular/router";
 
 export const TOKEN ='jwtToken';
 
@@ -11,7 +11,12 @@ export const TOKEN ='jwtToken';
 })
 export class AuthenticationService {
 
-  constructor(private httpClient: HttpClient) {}
+  private _isAdmin: boolean;
+  private _roleName: string;
+
+  constructor(private httpClient: HttpClient, private router: Router) {
+
+  }
 
   jwtAuthentication(email, password) {
     return this.httpClient.post<any>(
@@ -21,6 +26,12 @@ export class AuthenticationService {
       }).pipe(
       map(
         data => {
+          if(data && data.jwtToken && data.roleName) {
+            this._roleName = data.roleName;
+            if(data.roleName && data.roleName === "ADMIN")
+              localStorage.setItem("roleName", this._roleName);
+          }
+          this._isAdmin = data && data.jwtToken && data.roleName.indexOf("ADMIN") > -1;
           localStorage.setItem(TOKEN, `Bearer_${data.jwtToken}`);
         }
       )
@@ -34,6 +45,20 @@ export class AuthenticationService {
   }
 
   logout() {
-    return this.httpClient.post('http://localhost:8080/api/auth/logout', {}).pipe();
+    return this.httpClient.post('http://localhost:8080/api/auth/logout', {}).pipe(
+      map(
+        data => {
+          this._isAdmin = false;
+        }
+      )
+    );
+  }
+
+
+  get isAdmin(): boolean {
+    return !!localStorage.getItem("roleName");
+  }
+  get roleName(): string {
+    return this._roleName;
   }
 }

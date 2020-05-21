@@ -29,11 +29,15 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
 import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
 import { faSquare, faCheckSquare } from '@fortawesome/free-solid-svg-icons';
 import { AdminPageComponent } from './components/admin/admin-page/admin-page.component';
+import {Role} from "./components/common/role";
+import { UsersControlComponent } from './components/components/admin/users-control/users-control.component';
 
 
 const appRoutes = [
   {path: '', component: HomeComponent},
   {path: 'auth', component: AuthentictionComponent},
+  {path: 'admin/users', component: UsersControlComponent, canActivate: [RouteGuardService], data: { role: 'ADMIN' } },
+  {path: 'admin', component: AdminPageComponent, canActivate: [RouteGuardService], data: { role: 'ADMIN' } },
   {path: 'reg', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent, canActivate:[RouteGuardService]},
   {path: 'profile/u-annonces', component: MyAnnoncesComponent, canActivate:[RouteGuardService]},
@@ -65,7 +69,8 @@ const appRoutes = [
     UpdAnnonceComponent,
     ReceptionImageComponent,
     UserInfoComponent,
-    AdminPageComponent
+    AdminPageComponent,
+    UsersControlComponent
   ],
   imports: [
     NgbModule,

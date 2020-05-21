@@ -3,4 +3,5 @@ export class Account {
   email: string;
   password: string;
   passwordConfirm: string;
+  active: boolean;
 }

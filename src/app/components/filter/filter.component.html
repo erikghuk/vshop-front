@@ -126,9 +126,17 @@
           <!-- select carburant -->
           <div class="col-lg-2">
             <label for="carb"></label>
-            <select class="form-control" id="carb">
+            <select class="form-control" id="carb" *ngIf="carbs; else elseBlock2" (change)="selectCarburant($event)">
               <option class="text-muted">Carburant</option>
+              <option *ngFor="let m of carbs" [value]="m['typeOfCarburant']">{{m['typeOfCarburant']}}</option>
             </select>
+            <ng-template #elseBlock2>
+              <label>
+                <select class="form-control inputstl" disabled>
+                  <option class="text-muted">Carburant</option>
+                </select>
+              </label>
+            </ng-template>
           </div>
 
           <!-- select color -->

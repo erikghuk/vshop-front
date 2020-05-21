@@ -15,13 +15,14 @@ a:hover {
   border-left: 1px solid #c1c1c1;
 }
 
-.filters {
-  float: right;
-  margin-right: 20px;
-  margin-top: 8px;
-}
 .btn-filters {
-  width: 200px;
+  width: 180px;
   background-color: #171717;
   color: white;
+}
+
+.annonce-count {
+  border: 1px solid white;
+  background-color: #171717;
+  padding: 5px 15px;
 }

@@ -1,0 +1,31 @@
+<form>
+  <div class="form-group form-inline">
+    User search: <input class="form-control ml-2" type="text"/>
+  </div>
+</form>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Pseudo</th>
+    <th scope="col">Email</th>
+    <th scope="col">Prénom</th>
+    <th scope="col">Date de naissance</th>
+    <th scope="col">Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of users">
+    <td><ngb-highlight [result]="user.id"></ngb-highlight></td>
+    <td><ngb-highlight [result]="user.userName"></ngb-highlight></td>
+    <td><ngb-highlight [result]="user.account.email"></ngb-highlight></td>
+    <td><ngb-highlight *ngIf="user.userInfo" [result]="user.userInfo.firstName + ' ' + user.userInfo.lastName"></ngb-highlight></td>
+    <td><ngb-highlight *ngIf="user.userInfo" [result]="user.userInfo.dob"></ngb-highlight></td>
+    <td>
+      <button *ngIf="user.account.active" (click)="userStatus(user)">Active</button>
+      <button *ngIf="!user.account.active" (click)="userStatus(user)">Passive</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

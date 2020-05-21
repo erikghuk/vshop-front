@@ -1,4 +1,4 @@
-<div class="container spacing">
+<div class="container">
   <div class="row">
     <div class="col-lg-6">
       <a (click)="backToSearchResult()" class="arrow-back">{{arrowLeft}}</a>
@@ -22,7 +22,7 @@
     </div>
   </div>
   <div class="row spacing">
-    <div class="col-lg-6">
+    <div class="col-lg-6 col-sm-12 col-md-12 col-xs-12">
     <figure>
       <div class="main-image-div">
         <img class="main-image" src="http://localhost:8080/img/{{selectedImage}}" alt="">
@@ -70,7 +70,7 @@
             </tr>
             <tr>
               <td>Carburant</td>
-              <td class="text-muted">essence</td>
+              <td class="text-muted">{{annonce.vehicle.carburant.typeOfCarburant}}</td>
             </tr>
           </table>
         </div>

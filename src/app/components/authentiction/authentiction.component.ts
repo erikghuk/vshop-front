@@ -42,17 +42,20 @@ export class AuthentictionComponent implements OnInit {
       this.authService.jwtAuthentication(email, pass)
         .subscribe(
           data => {
-            // redirect the previous page after sign in
-            let params = this.route.snapshot.queryParams;
-            if (params['redirectURL']) {
-              this.redirectURL = params['redirectURL'];
-            }
-            if (this.redirectURL) {
-              this.router.navigateByUrl(this.redirectURL,)
-                .catch(() => this.router.navigate(['profile']))
+            if(this.authService.isAdmin) {
+              this.router.navigate(['admin']);
             } else {
-
-              this.router.navigate(['profile'])
+              // redirect the previous page after sign in
+              let params = this.route.snapshot.queryParams;
+              if (params['redirectURL']) {
+                this.redirectURL = params['redirectURL'];
+              }
+              if (this.redirectURL) {
+                this.router.navigateByUrl(this.redirectURL,)
+                  .catch(() => this.router.navigate(['profile']));
+              } else {
+                this.router.navigate(['profile']);
+              }
             }
 
 

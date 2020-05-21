@@ -7,20 +7,22 @@
 </div>
 
 <div class="container">
-  <div class="border border-success search-result">
+  <div class="row justify-content-between">
+    <div class="col-lg-3 col-md-6 col-sm-6">
+      <span class="btn btn-outline-light btn-filters" *ngIf="countOfAnnonces <= 1">{{countOfAnnonces}} annonce</span>
+      <span class="btn btn-outline-light btn-filters" *ngIf="countOfAnnonces > 1">{{countOfAnnonces}} annonces</span>
+    </div>
 
-    <div ngbDropdown class="d-inline-block filters">
+    <div *ngIf="annonces.length != 0" ngbDropdown class="d-inline-block col-lg-3 col-md-6 col-sm-6">
       <button class="btn btn-outline-light btn-filters" id="dropdownBasic1" ngbDropdownToggle>{{dropDowText}}</button>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
         <button ngbDropdownItem *ngFor="let menuItem of sortOrders" (click)="sortByPrice(menuItem)">
           {{menuItem}}
         </button>
-
       </div>
     </div>
-
-    <span class="alert alert-info info-font" *ngIf="countOfAnnonces <= 1">{{countOfAnnonces}} annonce</span>
-    <span class="alert alert-info info-font" *ngIf="countOfAnnonces > 1">{{countOfAnnonces}} annonces</span>
+  </div>
+  <div class="border border-success search-result">
     <div *ngFor="let annonce of annonces" class="border annonce-style">
       <a routerLink="/search-result/annonce/{{annonce.id}}" (click)="selectAnnonce(annonce)">
         <div class="container">

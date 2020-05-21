@@ -12,6 +12,8 @@ import {NavigationExtras, Router} from "@angular/router";
 import {SharingService} from "../../service/outil/sharing.service";
 import {Price} from "../../common/price";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {Carburant} from "../common/carburant";
+import {VehicleSService} from "../service/data/vehicule/vehicle-s.service";
 
 @Component({
   selector: 'app-filter',
@@ -33,6 +35,10 @@ export class FilterComponent implements OnInit {
 
   gearBox: GearBox;
   gearboxes: GearBox[];
+
+
+  carb: Carburant;
+  carbs: Carburant[];
 
   marques: Marque[];
   marque: Marque;
@@ -62,8 +68,9 @@ export class FilterComponent implements OnInit {
     private marqueService: MarqueService,
     private modelService: ModelService,
     private boxService: BoiteVitesseService,
-    private annoncesService: AnnoncesService
+    private carbService: VehicleSService
   ) {
+    this.carb = new Carburant();
     this.gearBox = new GearBox();
     this.dateStart = new Year();
     this.dateEnd = new Year();
@@ -104,6 +111,11 @@ export class FilterComponent implements OnInit {
       error => this.handleError(error)
     );
 
+    this.carbService.getCarbList().subscribe(
+      carbResponse => this.handleCarbResponse(carbResponse),
+      error => this.handleError(error)
+    );
+
   }
 
   private handleMarqueResponse(response) {
@@ -140,6 +152,10 @@ export class FilterComponent implements OnInit {
     }
   }
 
+  private handleCarbResponse(response) {
+    this.carbs = response;
+  }
+
   private handleBoxResponse(response) {
     this.gearboxes = response;
   }
@@ -158,6 +174,12 @@ export class FilterComponent implements OnInit {
       this.annonceFilter.gearbox = this.gearBox;
     } else {
       this.annonceFilter.gearbox = null;
+    }
+
+    if(this.carb.typeOfCarburant) {
+      this.annonceFilter.carburant = this.carb;
+    } else {
+      this.annonceFilter.carburant = null;
     }
 
     if (this.priceStart.amount) {
@@ -227,6 +249,10 @@ export class FilterComponent implements OnInit {
 
   selectGearBox(event: any) {
     this.gearBox.boxName = event.target.value;
+  }
+
+  selectCarburant(event) {
+    this.carb.typeOfCarburant = event.target.value;
   }
 
   selectKmS(event: any) {

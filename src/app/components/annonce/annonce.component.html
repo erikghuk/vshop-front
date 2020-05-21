@@ -77,6 +77,23 @@
                 <div *ngIf="f.box.errors.required">Le marque de vehicule est obligatoire</div>
               </div>
             </div>
+
+            <div class="form-group col-lg-3">
+              <label for="box"><span class="main-text-font">Carburant</span></label>
+              <select formControlName="carb" class="form-control form-control-sm" id="box" *ngIf="carbs; else elseBlock2" (change)="selectCarb()" [ngClass]="{ 'is-invalid': submitted && f.carb.errors }">
+                <option value="">Choisissez</option>
+                <option *ngFor="let m of carbs" [value]="m['typeOfCarburant']">{{m['typeOfCarburant']}}</option>
+              </select>
+              <ng-template #elseBlock2>
+                <select class="form-control form-control-sm">
+                  <option>Choisissez</option>
+                </select>
+              </ng-template>
+              <div *ngIf="submitted && f.carb.errors" class="invalid-feedback">
+                <div *ngIf="f.carb.errors.required">Le type de carburant est obligatoire</div>
+              </div>
+            </div>
+
           </div>
 
           <div class="form-row top-space">

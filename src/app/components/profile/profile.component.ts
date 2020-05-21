@@ -45,10 +45,9 @@ export class ProfileComponent implements OnInit {
   }
 
   handleResponse(response) {
-    if(response == null || ( response.firstName === ' ' && response.lastName === ' ')) {
+    if(response == null || ( response.firstName === ' ' && response.lastName === ' ') || ( response.firstName === null && response.lastName === null)) {
       this.userInfoService.getUser().subscribe (
-        response => this.message = response.userName,
-        error => console.log("UserName problem from server: Look this error ===>>> " + error)
+        response => this.message = response.userName
       )
     } else {
       this.userInfo.firstName = response.firstName;

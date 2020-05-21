@@ -15,6 +15,8 @@ import {ImageUrl} from "../../common/image-url";
 import {IMAGES_MAX_COUNT} from "../../app.constants";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {Carburant} from "../common/carburant";
+import {VehicleSService} from "../service/data/vehicule/vehicle-s.service";
 
 
 @Component({
@@ -27,6 +29,10 @@ export class AnnonceComponent implements OnInit {
 
   gearbox: GearBox;
   gearboxes: GearBox[];
+
+  carb: Carburant;
+  carbs: Carburant[];
+
 
   marques: Marque[];
   marque: Marque;
@@ -54,6 +60,7 @@ export class AnnonceComponent implements OnInit {
   nameOfFileInput: string[] = [`Choisissez min 1 et max ${IMAGES_MAX_COUNT} images`];
   default: string = "Choisissez";
 
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -61,8 +68,10 @@ export class AnnonceComponent implements OnInit {
     private marqueService: MarqueService,
     private modelService: ModelService,
     private boxService: BoiteVitesseService,
+    private vehicleService: VehicleSService
   )
   {
+    this.carb = new Carburant();
     this.vehicle = new Vehicle();
     this.annonce = new Annonce();
     this.marque = new Marque();
@@ -79,7 +88,8 @@ export class AnnonceComponent implements OnInit {
       year: ['', [Validators.required, Validators.min(1920), Validators.max(new Date().getFullYear()), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       price: ['', [Validators.required, Validators.min(0), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
       km: ['', [Validators.required, Validators.min(0), Validators.pattern(/^-?(0|[1-9]\d*)?$/)]],
-      box: ['', Validators.required]
+      box: ['', Validators.required],
+      carb: ['', Validators.required]
     });
   }
 
@@ -89,6 +99,9 @@ export class AnnonceComponent implements OnInit {
     );
     this.boxService.getBoxList().subscribe(
       boxResponse=>this.gearboxes=boxResponse
+    );
+    this.vehicleService.getCarbList().subscribe(
+      carbResponse=>this.carbs=carbResponse
     );
   }
 
@@ -122,6 +135,7 @@ export class AnnonceComponent implements OnInit {
       this.vehicle.model = this.model;
       this.vehicle.model.marque = this.marque;
       this.vehicle.gearbox = this.gearbox;
+      this.vehicle.carburant = this.carb;
       this.vehicle.km = this.annonceForm.value['km'];
       this.vehicle.year = this.year;
       this.vehicle.price = this.price;
@@ -198,7 +212,13 @@ export class AnnonceComponent implements OnInit {
     this.year.productionDate = this.annonceForm.value['year'];
   }
 
+
+  selectCarb() {
+    this.carb.typeOfCarburant = this.annonceForm.value['carb'];
+  }
+
   private cleanup(message: string) {
     return message.trim().replace(/  +/g, ' ');
   };
+
 }

@@ -3,6 +3,7 @@ import {Model} from "./model";
 import {Year} from "./year";
 import {GearBox} from "./gear-box";
 import {Price} from "./price";
+import {Carburant} from "../components/common/carburant";
 
 export class AnnonceFilter {
   marque: Marque;
@@ -14,4 +15,5 @@ export class AnnonceFilter {
   dateEnd: Year;
   priceStart: Price;
   priceEnd: Price;
+  carburant: Carburant;
 }
