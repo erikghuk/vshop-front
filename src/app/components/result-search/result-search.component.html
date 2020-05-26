@@ -13,7 +13,7 @@
       <span class="btn btn-outline-light btn-filters" *ngIf="countOfAnnonces > 1">{{countOfAnnonces}} annonces</span>
     </div>
 
-    <div *ngIf="annonces.length != 0" ngbDropdown class="d-inline-block col-lg-3 col-md-6 col-sm-6">
+    <div ngbDropdown class="d-inline-block col-lg-3 col-md-6 col-sm-6">
       <button class="btn btn-outline-light btn-filters" id="dropdownBasic1" ngbDropdownToggle>{{dropDowText}}</button>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
         <button ngbDropdownItem *ngFor="let menuItem of sortOrders" (click)="sortByPrice(menuItem)">
