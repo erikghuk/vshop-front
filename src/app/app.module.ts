@@ -31,12 +31,14 @@ import { faSquare, faCheckSquare } from '@fortawesome/free-solid-svg-icons';
 import { AdminPageComponent } from './components/admin/admin-page/admin-page.component';
 import {Role} from "./components/common/role";
 import { UsersControlComponent } from './components/components/admin/users-control/users-control.component';
+import { AddDataComponent } from './components/components/admin/add-data/add-data.component';
 
 
 const appRoutes = [
   {path: '', component: HomeComponent},
   {path: 'auth', component: AuthentictionComponent},
   {path: 'admin/users', component: UsersControlComponent, canActivate: [RouteGuardService], data: { role: 'ADMIN' } },
+  {path: 'admin/add_data', component: AddDataComponent, canActivate: [RouteGuardService], data: { role: 'ADMIN' } },
   {path: 'admin', component: AdminPageComponent, canActivate: [RouteGuardService], data: { role: 'ADMIN' } },
   {path: 'reg', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent, canActivate:[RouteGuardService]},
@@ -70,7 +72,8 @@ const appRoutes = [
     ReceptionImageComponent,
     UserInfoComponent,
     AdminPageComponent,
-    UsersControlComponent
+    UsersControlComponent,
+    AddDataComponent
   ],
   imports: [
     NgbModule,

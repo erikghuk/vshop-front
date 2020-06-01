@@ -4,6 +4,8 @@ import {API_URL} from "../../../app.constants";
 import {User} from "../../../common/user";
 import {Annonce} from "../../../common/annonce";
 import {Account} from "../../../common/account";
+import {Marque} from "../../../common/marque";
+import {Model} from "../../../common/model";
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +28,13 @@ export class AdminService {
 
   setUserStatus(acc: Account) {
     return this.httpClient.put<boolean>(`${API_URL}/admin/active`, acc).pipe();
+  }
+
+  addMarques(marque: Marque) {
+    return this.httpClient.post<Marque>(`${API_URL}/admin/addCarMarque`, marque).pipe();
+  }
+
+  addModels(model: Model) {
+    return this.httpClient.post<Model>(`${API_URL}/admin/addCarModel`, model).pipe();
   }
 }

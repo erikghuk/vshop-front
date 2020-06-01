@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <form (ngSubmit)="addMarque()">
+        <div class="form-group w-50">
+          <label for="marque"><span class="simple-text-font">Marque</span></label>
+          <input class="form-control form-control-md" type="text" id="marque" name="marque" [(ngModel)]="marque.marqueName">
+        </div>
+        <button class="btn btn-success" name="submit">Add</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6 margin-top-20">
+      <ul class="list-group">
+        <li class="list-group-item marque-style" *ngFor="let mar of marques" (click)="addModelBlock(mar)" >{{mar.marqueName}}</li>
+      </ul>
+    </div>
+
+    <div class="col-lg-6 margin-top-20" [ngClass]="{invisible: visibility}">
+      <form (ngSubmit)="addModel()">
+        <div class="form-group w-50">
+          <label for="model"><span class="simple-text-font">Model de {{marque.marqueName}}</span></label>
+          <input class="form-control form-control-md" type="text" id="model" name="model" [(ngModel)]="model.modelName">
+        </div>
+        <button class="btn btn-success" name="submit">Add</button>
+      </form>
+      <ul class="list-group">
+        <li class="list-group-item marque-style" *ngFor="let mod of models">{{mod.modelName}}</li>
+      </ul>
+    </div>
+  </div>
+
+</div>

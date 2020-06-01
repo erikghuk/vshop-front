@@ -1,0 +1,6 @@
+.marque-style {
+  cursor: pointer;
+}
+.marque-style:hover {
+  background-color: #d1cfd5;
+}
